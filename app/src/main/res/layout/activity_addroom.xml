@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.l124320.cloudprojectfinal.addroom">
+
+    <ImageView
+        android:id="@+id/imageViewRoom"
+        android:layout_width="277dp"
+        android:layout_height="116dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonpicadd"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerAvailible"
+        app:layout_constraintStart_toStartOf="@+id/spinnerAvailible" />
+
+    <Button
+        android:id="@+id/buttonpicadd"
+        android:layout_width="113dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Upload"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewRoom"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="@+id/imageViewRoom" />
+
+    <EditText
+        android:id="@+id/editTextRoomName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Room Name"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/editTextPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Price"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDetail"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRoomName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextRoomName" />
+
+    <EditText
+        android:id="@+id/editTextDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Details"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerAvailible"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPrice"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextPrice" />
+
+    <Spinner
+        android:id="@+id/spinnerAvailible"
+        android:layout_width="213dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:entries="@array/Avail_array"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewRoom"
+        app:layout_constraintEnd_toEndOf="@+id/editTextDetail"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextDetail" />
+
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="110dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="8dp"
+        android:text="Add Room"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonpicadd"
+        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintStart_toStartOf="@+id/buttonpicadd" />
+
+</android.support.constraint.ConstraintLayout>

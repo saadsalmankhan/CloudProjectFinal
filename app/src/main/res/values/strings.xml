@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Cloud Project Final</string>
+
+    <string-array name="Avail_array">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+</resources>
