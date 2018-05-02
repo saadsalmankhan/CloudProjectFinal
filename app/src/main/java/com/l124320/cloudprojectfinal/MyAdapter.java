@@ -18,11 +18,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoomViewHolder> im
 
 
 
+
     public class RoomViewHolder extends RecyclerView.ViewHolder{
 
         TextView RoomNameAdap;
         TextView RoomPriceAdap;
         TextView RoomAvailAdap;
+        TextView RoomDetAdap;
         ImageView RoomImageAdap;
         Button BookRoomAdap;
 
@@ -34,6 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoomViewHolder> im
             RoomAvailAdap=v.findViewById(R.id.textviewAvailRe);
             RoomImageAdap=v.findViewById(R.id.imageViewRoom);
             BookRoomAdap=v.findViewById(R.id.buttonBookRe);
+            //RoomDetAdap=v.findViewById(R.id.editTextDetailR)
 
         }
 
@@ -42,9 +45,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoomViewHolder> im
 
 
     private List<hotelroom> data;
-    private List<Integer> layouts;
+    private int layouts;
 
-    public MyAdapter(List<hotelroom> data, List<Integer> layouts) {
+    public MyAdapter(List<hotelroom> data, int layouts) {
         this.data = data;
         this.layouts = layouts;
     }
@@ -74,12 +77,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoomViewHolder> im
     }
 
     @Override
-    public void onBindViewHolder(MyAdapter.RoomViewHolder holder, int position) {
+    public void onBindViewHolder(RoomViewHolder holder, int position) {
         if(data != null && holder != null){
             //int i = getItemViewType(position);
-            ((RoomViewHolder)holder).RoomNameAdap.setText(((hotelroom)data.get(position)).getRoomName());
-            ((RoomViewHolder)holder).RoomPriceAdap.setText(((hotelroom)data.get(position)).getPrice());
-            ((RoomViewHolder)holder).RoomAvailAdap.setText(((hotelroom)data.get(position)).getAvailibility());
+            holder.RoomNameAdap.setText(data.get(position).getRoomName());
+            holder.RoomPriceAdap.setText(data.get(position).getPrice());
+            holder.RoomAvailAdap.setText(data.get(position).getAvailibility());
             //((RoomViewHolder)holder).Room.setText(((hotelroom)data.get(position)).getRoomName());
             //((RoomViewHolder)holder).RoomImageAdap.setImageBitmap(((hotelroom)data.get(position)).get());
 
@@ -96,6 +99,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RoomViewHolder> im
 
     @Override
     public void onClick(View v) {
-
+        //if(v.getId()==BookRoomAdap)
     }
 }

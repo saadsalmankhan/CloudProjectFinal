@@ -1,5 +1,7 @@
 package com.l124320.cloudprojectfinal;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -10,8 +12,6 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -44,78 +44,79 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 
-public class addroom extends AppCompatActivity implements View.OnClickListener{
 
-    EditText RoomName;
-    EditText RoomPrice;
-    EditText RoomDetails;
-    Spinner RoomAvail;
 
-    ImageView RoomPicAdd;
+public class editroom extends AppCompatActivity implements View.OnClickListener{
 
-    Button UploadImage;
-    Button addfinalroom;
+
+    EditText RoomNameEdit;
+    EditText RoomPriceEdit;
+    EditText RoomDetailsEdit;
+    Spinner RoomAvailEdit;
+
+    ImageView RoomPicAddEdit;
+
+    Button UploadImageEdit;
+    Button addfinalroomEdit;
 
     ProgressDialog mProgressDialog;
     private static int IMG_RESULT = 1;
     Intent intent;
 
-    DatabaseReference addroomtofire;
-    FirebaseDatabase mydata;
+    DatabaseReference addroomtofireEdit;
+    FirebaseDatabase mydataEdit;
 
     private DatabaseReference mDatabase;
     public hotelroom myroom;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addroom);
+        setContentView(R.layout.activity_editroom);
 
-        RoomName=findViewById(R.id.editTextRoomName);
-        RoomPrice=findViewById(R.id.editTextPrice);
-        RoomDetails=findViewById(R.id.editTextDetail);
-        RoomAvail=findViewById(R.id.spinnerAvailible);
+            RoomNameEdit=findViewById(R.id.editTextRoomNameEdit);
+            RoomPriceEdit=findViewById(R.id.editTextPriceEdit);
+            RoomDetailsEdit=findViewById(R.id.editTextDetailEdit);
+            RoomAvailEdit=findViewById(R.id.spinnerAvailibleEdit);
 
-        RoomPicAdd=findViewById(R.id.imageViewRoom);
+            RoomPicAddEdit=findViewById(R.id.imageViewRoomEdit);
 
-        UploadImage=findViewById(R.id.buttonpicadd);
-        addfinalroom=findViewById(R.id.buttonAdd);
-
-
-        mydata=FirebaseDatabase.getInstance();
-        addroomtofire=mydata.getReference();
-        //addroomtofire.child("foofo");
-
-        //intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-        //startActivityForResult(intent, IMG_RESULT);
-        UploadImage.setOnClickListener(this);
-        addfinalroom.setOnClickListener(this);
-    }
+            UploadImageEdit=findViewById(R.id.buttonpicEdit);
+            addfinalroomEdit=findViewById(R.id.buttonEdit);
 
 
-    @Override
-    public void onClick(View v) {
-        if(v==UploadImage){
-            intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
+            mydataEdit=FirebaseDatabase.getInstance();
+            addroomtofireEdit=mydataEdit.getReference();
+            //addroomtofire.child("foofo");
 
-            startActivityForResult(intent, IMG_RESULT);
+            //intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+            //startActivityForResult(intent, IMG_RESULT);
+            UploadImageEdit.setOnClickListener(this);
+            addfinalroomEdit.setOnClickListener(this);
         }
-        if(v==addfinalroom){
-            addRoomtodatabase();
-            Toast.makeText(this, "Room Added", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, adminspace.class));
-        }
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+
+        @Override
+        public void onClick(View v) {
+            if(v==UploadImageEdit){
+                intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(intent, IMG_RESULT);
+            }
+            if(v==addfinalroomEdit){
+                addRoomtodatabase();
+                Toast.makeText(this, "Room Added", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this, adminspace.class));
+            }
+        }
+
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
 
             if (requestCode == IMG_RESULT && resultCode == RESULT_OK
                     && null != data) {
@@ -125,7 +126,7 @@ public class addroom extends AppCompatActivity implements View.OnClickListener{
                 try {
 
                     Bitmap bimp=MediaStore.Images.Media.getBitmap(getContentResolver(), URI);
-                    RoomPicAdd.setImageBitmap(bimp);
+                    RoomPicAddEdit.setImageBitmap(bimp);
 
 
                 }
@@ -135,20 +136,26 @@ public class addroom extends AppCompatActivity implements View.OnClickListener{
                 }
 
             }
+        }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     public void addRoomtodatabase(){
-        String Roomnaam=RoomName.getText().toString().trim();
-        String RoomP=RoomPrice.getText().toString().trim();
-        String IsAvail=RoomAvail.getSelectedItem().toString().trim();
+        String Roomnaam=RoomNameEdit.getText().toString().trim();
+        String RoomP=RoomPriceEdit.getText().toString().trim();
+        String IsAvail=RoomAvailEdit.getSelectedItem().toString().trim();
         //String PicFirebase="none";
-                //RoomPicAdd.get
-        String Roomdet=RoomDetails.getText().toString().trim();
+        //RoomPicAdd.get
+        String Roomdet=RoomDetailsEdit.getText().toString().trim();
 
         if(!TextUtils.isEmpty(Roomnaam)){
 
             try {
-                String id = addroomtofire.push().getKey();
+                String id = addroomtofireEdit.push().getKey();
                 hotelroom myroom = new hotelroom(id, Roomnaam, RoomP, IsAvail, Roomdet);
                 //addroomtofire.child(id).setValue(myroom);
 
@@ -158,14 +165,12 @@ public class addroom extends AppCompatActivity implements View.OnClickListener{
                 //mDatabase = FirebaseDatabase.getInstance().getReference();
                 //mDatabase.child("users").child(id).setValue("123", "123");
                 //abc aa=new abc("saad");
-                /*addroomtofire.child("hotelroom").child(id).child("RoomID").setValue(myroom.getRoomId());
-                addroomtofire.child("hotelroom").child(id).child("RoomName").setValue(myroom.getRoomName());
-                addroomtofire.child("hotelroom").child(id).child("RoomPrice").setValue(myroom.getPrice());
-                addroomtofire.child("hotelroom").child(id).child("RoomAvail").setValue(myroom.getAvailibility());
-                addroomtofire.child("hotelroom").child(id).child("RoomDetails").setValue(myroom.getDetail());*/
+                addroomtofireEdit.child("hotelroom").child(id).child("RoomID").setValue(myroom.getRoomId());
+                addroomtofireEdit.child("hotelroom").child(id).child("RoomName").setValue(myroom.getRoomName());
+                addroomtofireEdit.child("hotelroom").child(id).child("RoomPrice").setValue(myroom.getPrice());
+                addroomtofireEdit.child("hotelroom").child(id).child("RoomAvail").setValue(myroom.getAvailibility());
+                addroomtofireEdit.child("hotelroom").child(id).child("RoomDetails").setValue(myroom.getDetail());
                 //myroom.
-
-                addroomtofire.child("hotelroom").child(id).setValue(myroom);
 
                 Toast.makeText(this, "Room Added", Toast.LENGTH_LONG)
                         .show();

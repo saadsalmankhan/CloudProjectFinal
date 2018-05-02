@@ -3,7 +3,7 @@
     package="com.l124320.cloudprojectfinal">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -23,7 +23,8 @@
         <activity android:name=".signup" />
         <activity android:name=".profile" />
         <activity android:name=".adminspace" />
-        <activity android:name=".addroom"></activity>
+        <activity android:name=".addroom" />
+        <activity android:name=".editroom"></activity>
     </application>
 
 </manifest>
